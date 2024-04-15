@@ -1,0 +1,24 @@
+# Create a GitHub action to email a report from a file at 6 a.m. daily.
+# Use the schedule event to trigger the action.
+name: Email Report
+on:
+  schedule:
+    - cron: '0 6 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+      - name: Send report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL }}
+          password: ${{ secrets.PASSWORD }}
+          subject: Daily Report
+          body: ./report.txt
+          to: ${{ secrets.RECIPIENT }}
+          from: ${{ secrets.EMAIL }}
+          attachments: ./report.txt

@@ -56,5 +56,5 @@ const nestedData = [
     ],
 ];
 
-const names = nestedData.flatMap(array => array.map(item => item.name));
+names = nestedData.flatMap(array => array.map(item => item.name));
 console.log(names);  // Outputs: ["John", "Jane", "Bob", "Alice", "Eve", "Charlie"]
